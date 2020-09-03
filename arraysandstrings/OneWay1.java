@@ -1,3 +1,5 @@
+package arraysandstrings;
+
 public class OneWay1 {
     boolean oneEditAway(String first, String second) {
         if (first.length() == second.length()) {

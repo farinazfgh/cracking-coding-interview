@@ -1,3 +1,5 @@
+package arraysandstrings;
+
 public class StringCompressionG {
     String compressBad(String str) {
         String compressedString = "";

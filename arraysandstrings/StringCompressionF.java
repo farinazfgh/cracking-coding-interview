@@ -1,3 +1,5 @@
+package arraysandstrings;
+
 public class StringCompressionF {
     static String getCompression(String str) {
         /*
