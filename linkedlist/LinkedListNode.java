@@ -1,6 +1,6 @@
 package linkedlist;
 
-public class LinkedListG {
+public class LinkedListNode {
     Node head = null;
     int size = 0;
 
@@ -16,7 +16,6 @@ public class LinkedListG {
         pointer.next = new Node(data);
         size++;
     }
-
     void delete(int data) {
         if (head == null) return;
 
@@ -35,14 +34,5 @@ public class LinkedListG {
             }
             pointer = pointer.next;
         }
-    }
-
-    void visit(Node node) {
-        if (node == null) return;
-        while (node != null) {
-            System.out.print(node.data + " ");
-            node = node.next;
-        }
-        System.out.println();
     }
 }
