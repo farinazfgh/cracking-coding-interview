@@ -13,6 +13,14 @@ public class StackWithMin extends Stack<StackWithMin.Node> {
             this.value = value;
             this.min = min;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", min=" + min +
+                    '}';
+        }
     }
 
     public void push(int value) {
@@ -46,6 +54,9 @@ public class StackWithMin extends Stack<StackWithMin.Node> {
 
         stackWithMin.push(1);
         System.out.println(stackWithMin.min());
+        while (!stackWithMin.isEmpty()) {
+            System.out.println(stackWithMin.pop());
+        }
 
     }
 }
