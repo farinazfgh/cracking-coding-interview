@@ -1,15 +1,14 @@
 package treesandgraphs;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class RouteBetweenNodes {
-    Graph G;
+    Graph G = new Graph();
     boolean[] isVisited = new boolean[G.V];
 
     void dfs(Graph G, int vertex) {
         isVisited[vertex] = true;
-        List<Integer> neighbors = G.adjacencyList[vertex];
+        List<Integer> neighbors = G.adjacencyList.get(vertex);
         for (int current : neighbors) {
             if (!isVisited[current]) {
                 isVisited[current] = true;
@@ -20,7 +19,7 @@ public class RouteBetweenNodes {
 
     boolean search(Graph G, int start, int end) {
         isVisited[start] = true;
-        List<Integer> neighbors = G.adjacencyList[start];
+        List<Integer> neighbors = G.adjacencyList.get(start);
         for (int current : neighbors) {
             if (current == end) return true;
             if (!isVisited[current]) {
@@ -87,6 +86,39 @@ public class RouteBetweenNodes {
 
         public Node[] getNodes() {
             return null;
+        }
+    }
+
+    void dfsIterative(int source) {
+        boolean[] isVisited = new boolean[G.V];
+        Stack<Integer> stack = new Stack();
+        stack.push(source);
+        isVisited[source] = true;
+        while (!stack.isEmpty()) {
+            int vertex = stack.pop();
+            for (int currentVertex : G.adjacencyList.get(vertex)) {
+                if (!isVisited[currentVertex]) {
+                    isVisited[currentVertex] = true;
+                    stack.push(currentVertex);
+                }
+            }
+        }
+    }
+
+    void bfs(int source) {
+        boolean[] isVisited = new boolean[G.V];
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(source);
+        isVisited[source] = true;
+        while (!queue.isEmpty()) {
+            int vertex = queue.poll();
+            for (Integer currentVerex : G.adjacencyList.get(vertex)) {
+                if (!isVisited[currentVerex]) {
+                    isVisited[currentVerex] = true;
+                    queue.offer(currentVerex);
+                }
+            }
+
         }
     }
 }
