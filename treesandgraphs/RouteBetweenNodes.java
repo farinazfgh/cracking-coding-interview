@@ -125,7 +125,6 @@ public class RouteBetweenNodes {
                     queue.offer(currentVertex);
                 }
             }
-
         }
         System.out.println();
     }
