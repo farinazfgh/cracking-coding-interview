@@ -17,80 +17,38 @@ public class RouteBetweenNodes {
         }
     }
 
-    boolean search(Graph G, int start, int end) {
-        isVisited[start] = true;
-        Set<Integer> neighbors = G.adjacencyList.get(start);
-        for (int current : neighbors) {
-            if (current == end) return true;
-            if (!isVisited[current]) {
-                isVisited[current] = true;
-                dfs(G, current);
-            }
-        }
-        return false;
-    }
+    static class Edge {
+        final int from;
+        final int two;
 
-    static class Node {
-        public String name;
-        public Set<Node> nodes;
-        public State state;
-
-        public Set<Node> getNodes() {
-            return nodes;
+        public Edge(int from, int two) {
+            this.from = from;
+            this.two = two;
         }
 
-        public Node[] getAdjacent() {
-            return null;
+        @Override
+        public String toString() {
+            return from + " -> " + two;
         }
     }
 
-    enum State {Unvisited, Visited, Visiting;}
-
-    boolean search(GraphG g, Node start, Node end) {
-        if (start == end) return true;
-
-        // operates as Queue
-        LinkedList<Node> q = new LinkedList<Node>();
-
-        for (Node u : g.getNodes()) {
-            u.state = State.Unvisited;
-        }
-        start.state = State.Visiting;
-        q.add(start);
-        Node u;
-        while (!q.isEmpty()) {
-            u = q.removeFirst();
-            // i.e., dequeue()
-            if (u != null) {
-                for (Node v : u.getAdjacent()) {
-                    if (v.state == State.Unvisited) {
-                        if (v == end) {
-                            return true;
-                        } else {
-                            v.state = State.Visiting;
-                            q.add(v);
-                        }
-
-                    }
-                }
-                u.state = State.Visited;
-            }
-        }
-        return false;
+    static void printArray(int[] array) {
+        for (int value : array)
+            System.out.print(value + ", ");
+        System.out.println();
     }
 
-    static class GraphG {
-
-
-        public Set<Integer>[] adjacencyList;
-
-        public Node[] getNodes() {
-            return null;
-        }
+    static void printEdges(List<Edge> edges) {
+        for (Edge edge : edges)
+            System.out.print(edge + ", ");
+        System.out.println();
     }
 
     static void dfsIterative(Graph G, int source) {
+        System.out.println("************ DFS ************");
         boolean[] isVisited = new boolean[G.V()];
+        int[] parent = new int[G.V()];
+        List<Edge> E = new ArrayList<>();
         Stack<Integer> stack = new Stack<>();
         stack.push(source);
         isVisited[source] = true;
@@ -101,16 +59,24 @@ public class RouteBetweenNodes {
             if (neighbors == null) continue;
             for (int currentVertex : neighbors) {
                 if (!isVisited[currentVertex]) {
+                    parent[currentVertex] = vertex;
+                    E.add(new Edge(vertex, currentVertex));
                     isVisited[currentVertex] = true;
                     stack.push(currentVertex);
                 }
             }
         }
         System.out.println();
+        printArray(parent);
+        printEdges(E);
     }
 
     static void bfs(Graph G, int source) {
+        System.out.println("************ BFS ************");
         boolean[] isVisited = new boolean[G.V()];
+        List<Edge> E = new ArrayList<>();
+        int[] parent = new int[G.V()];
+
         Queue<Integer> queue = new ArrayDeque<>();
         queue.offer(source);
         isVisited[source] = true;
@@ -121,12 +87,16 @@ public class RouteBetweenNodes {
             if (neighbors == null) continue;
             for (int currentVertex : neighbors) {
                 if (!isVisited[currentVertex]) {
+                    parent[currentVertex] = vertex;
+                    E.add(new Edge(vertex, currentVertex));
                     isVisited[currentVertex] = true;
                     queue.offer(currentVertex);
                 }
             }
         }
         System.out.println();
+        printArray(parent);
+        printEdges(E);
     }
 
     public static void main(String[] args) {
@@ -136,25 +106,6 @@ public class RouteBetweenNodes {
         dfsIterative(graph, source);
         bfs(graph, source);
 
-    }
-
-    private static Graph createGraph() {
-        Graph graph = new Graph(6);
-        Scanner scanner = new Scanner(System.in);
-        int V = Integer.parseInt(scanner.nextLine());
-        int E = Integer.parseInt(scanner.nextLine());
-
-        for (int i = 0; i < E; i++) {
-            int from = Integer.parseInt(scanner.nextLine());
-            if (from < 0 || from > V)
-                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
-            int to = Integer.parseInt(scanner.nextLine());
-            if (to < 0 || to > V)
-                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
-            graph.addEdge(from, to);
-
-        }
-        return graph;
     }
 
     private static Graph createGraphFromArray(int v) {
@@ -181,5 +132,23 @@ public class RouteBetweenNodes {
 
     static void visit(int v) {
         System.out.print(v + ", ");
+    }
+    private static Graph createGraph() {
+        Graph graph = new Graph(6);
+        Scanner scanner = new Scanner(System.in);
+        int V = Integer.parseInt(scanner.nextLine());
+        int E = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < E; i++) {
+            int from = Integer.parseInt(scanner.nextLine());
+            if (from < 0 || from > V)
+                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
+            int to = Integer.parseInt(scanner.nextLine());
+            if (to < 0 || to > V)
+                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
+            graph.addEdge(from, to);
+
+        }
+        return graph;
     }
 }
