@@ -49,6 +49,7 @@ public class RouteBetweenNodes {
         boolean[] isVisited = new boolean[G.V()];
         int[] parent = new int[G.V()];
         List<Edge> E = new ArrayList<>();
+        int level = 0;
         Stack<Integer> stack = new Stack<>();
         stack.push(source);
         isVisited[source] = true;
@@ -65,10 +66,12 @@ public class RouteBetweenNodes {
                     stack.push(currentVertex);
                 }
             }
+            level++;
         }
         System.out.println();
         printArray(parent);
         printEdges(E);
+        System.out.println("level is:" + level);
     }
 
     static void bfs(Graph G, int source) {
@@ -76,6 +79,7 @@ public class RouteBetweenNodes {
         boolean[] isVisited = new boolean[G.V()];
         List<Edge> E = new ArrayList<>();
         int[] parent = new int[G.V()];
+        int level = 0;
 
         Queue<Integer> queue = new ArrayDeque<>();
         queue.offer(source);
@@ -93,10 +97,12 @@ public class RouteBetweenNodes {
                     queue.offer(currentVertex);
                 }
             }
+            level++;
         }
         System.out.println();
         printArray(parent);
         printEdges(E);
+        System.out.println("level is:" + level);
     }
 
     public static void main(String[] args) {
@@ -133,6 +139,7 @@ public class RouteBetweenNodes {
     static void visit(int v) {
         System.out.print(v + ", ");
     }
+
     private static Graph createGraph() {
         Graph graph = new Graph(6);
         Scanner scanner = new Scanner(System.in);
