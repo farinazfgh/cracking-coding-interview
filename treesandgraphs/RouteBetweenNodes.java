@@ -3,12 +3,12 @@ package treesandgraphs;
 import java.util.*;
 
 public class RouteBetweenNodes {
-    Graph G = new Graph();
-    boolean[] isVisited = new boolean[G.V];
+    Graph G = new Graph(5);
+    boolean[] isVisited = new boolean[G.V()];
 
     void dfs(Graph G, int vertex) {
         isVisited[vertex] = true;
-        List<Integer> neighbors = G.adjacencyList.get(vertex);
+        Set<Integer> neighbors = G.adjacencyList.get(vertex);
         for (int current : neighbors) {
             if (!isVisited[current]) {
                 isVisited[current] = true;
@@ -19,7 +19,7 @@ public class RouteBetweenNodes {
 
     boolean search(Graph G, int start, int end) {
         isVisited[start] = true;
-        List<Integer> neighbors = G.adjacencyList.get(start);
+        Set<Integer> neighbors = G.adjacencyList.get(start);
         for (int current : neighbors) {
             if (current == end) return true;
             if (!isVisited[current]) {
@@ -32,10 +32,10 @@ public class RouteBetweenNodes {
 
     static class Node {
         public String name;
-        public List<Node> nodes;
+        public Set<Node> nodes;
         public State state;
 
-        public List<Node> getNodes() {
+        public Set<Node> getNodes() {
             return nodes;
         }
 
@@ -82,43 +82,105 @@ public class RouteBetweenNodes {
     static class GraphG {
 
 
-        public List<Integer>[] adjacencyList;
+        public Set<Integer>[] adjacencyList;
 
         public Node[] getNodes() {
             return null;
         }
     }
 
-    void dfsIterative(int source) {
-        boolean[] isVisited = new boolean[G.V];
-        Stack<Integer> stack = new Stack();
+    static void dfsIterative(Graph G, int source) {
+        boolean[] isVisited = new boolean[G.V()];
+        Stack<Integer> stack = new Stack<>();
         stack.push(source);
         isVisited[source] = true;
         while (!stack.isEmpty()) {
             int vertex = stack.pop();
-            for (int currentVertex : G.adjacencyList.get(vertex)) {
+            visit(vertex);
+            Set<Integer> neighbors = G.adjacencyList.get(vertex);
+            if (neighbors == null) continue;
+            for (int currentVertex : neighbors) {
                 if (!isVisited[currentVertex]) {
                     isVisited[currentVertex] = true;
                     stack.push(currentVertex);
                 }
             }
         }
+        System.out.println();
     }
 
-    void bfs(int source) {
-        boolean[] isVisited = new boolean[G.V];
+    static void bfs(Graph G, int source) {
+        boolean[] isVisited = new boolean[G.V()];
         Queue<Integer> queue = new ArrayDeque<>();
         queue.offer(source);
         isVisited[source] = true;
         while (!queue.isEmpty()) {
             int vertex = queue.poll();
-            for (Integer currentVerex : G.adjacencyList.get(vertex)) {
-                if (!isVisited[currentVerex]) {
-                    isVisited[currentVerex] = true;
-                    queue.offer(currentVerex);
+            visit(vertex);
+            Set<Integer> neighbors = G.adjacencyList.get(vertex);
+            if (neighbors == null) continue;
+            for (int currentVertex : neighbors) {
+                if (!isVisited[currentVertex]) {
+                    isVisited[currentVertex] = true;
+                    queue.offer(currentVertex);
                 }
             }
 
         }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Graph graph = createGraphFromArray(6);
+        System.out.println(graph);
+        int source = 0;//hard coded just for simplicity
+        dfsIterative(graph, source);
+        bfs(graph, source);
+
+    }
+
+    private static Graph createGraph() {
+        Graph graph = new Graph(6);
+        Scanner scanner = new Scanner(System.in);
+        int V = Integer.parseInt(scanner.nextLine());
+        int E = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < E; i++) {
+            int from = Integer.parseInt(scanner.nextLine());
+            if (from < 0 || from > V)
+                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
+            int to = Integer.parseInt(scanner.nextLine());
+            if (to < 0 || to > V)
+                throw new IllegalArgumentException("vertex should be greater than 0 and less than V!");
+            graph.addEdge(from, to);
+
+        }
+        return graph;
+    }
+
+    private static Graph createGraphFromArray(int v) {
+        Graph graph = new Graph(v);
+        int V = 6;
+        int E = 9;
+        List<Integer[]> array = Arrays.asList(
+                new Integer[]{0, 5},
+                new Integer[]{0, 1},
+                new Integer[]{2, 0},
+                new Integer[]{2, 3},
+                new Integer[]{3, 2},
+                new Integer[]{3, 5},
+                new Integer[]{4, 3},
+                new Integer[]{4, 2},
+                new Integer[]{5, 4});
+
+        for (Integer[] value : array) {
+            graph.addEdge(value[0], value[1]);
+
+        }
+        return graph;
+    }
+
+    static void visit(int v) {
+        System.out.print(v + ", ");
     }
 }
