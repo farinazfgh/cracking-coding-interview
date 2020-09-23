@@ -1,8 +1,8 @@
 package treesandgraphs;
 
-public class BinaryTreeFromPostIn {
+public class BinaryTreeFromPreIn {
 
-    Util.Util.Node root;
+    Util.Node root;
     static int preIndex = 0;
 
     /* Recursive function to construct binary of size len from 
@@ -10,8 +10,7 @@ public class BinaryTreeFromPostIn {
        Initial values of inStrt and inEnd should be 0 and len -1.   
        The function doesn't do any error checking for cases where  
        inorder and preorder do not form a tree */
-    Util.Node buildTree(char in[], char pre[], int inStrt, int inEnd)
-    {
+    Util.Node buildTree(int[] in, int[] pre, int inStrt, int inEnd) {
         if (inStrt > inEnd)
             return null; 
   
@@ -38,8 +37,7 @@ public class BinaryTreeFromPostIn {
 
     /* Function to find index of value in arr[start...end] 
      The function assumes that value is present in in[] */
-    int search(char arr[], int strt, int end, char value)
-    {
+    int search(int arr[], int strt, int end, int value) {
         int i;
         for (i = strt; i <= end; i++) {
             if (arr[i] == value)
@@ -49,8 +47,7 @@ public class BinaryTreeFromPostIn {
     }
 
     /* This funtcion is here just to test buildTree() */
-    void printInorder(Util.Node node)
-    {
+    void printInorder(Util.Node node) {
         if (node == null)
             return;
 
@@ -65,13 +62,12 @@ public class BinaryTreeFromPostIn {
     }
 
     // driver program to test above functions 
-    public static void main(String args[])
-    {
-        BinaryTree tree = new BinaryTree();
-        char in[] = new char[] { 'D', 'B', 'E', 'A', 'F', 'C' };
-        char pre[] = new char[] { 'A', 'B', 'D', 'E', 'C', 'F' };
-        int len = in.length;
-        Util.Node root = tree.buildTree(in, pre, 0, len - 1);
+    public static void main(String args[]) {
+        BinaryTreeFromPreIn tree = new BinaryTreeFromPreIn();
+        int[] inn = {2, 6, 4, 1, 5, 7, 3};
+        int[] pre = {1, 2, 4, 6, 3, 5, 7};
+        int len = inn.length;
+        Util.Node root = tree.buildTree(inn, pre, 0, len - 1);
 
         // building the tree by printing inorder traversal 
         System.out.println("Inorder traversal of constructed tree is : ");

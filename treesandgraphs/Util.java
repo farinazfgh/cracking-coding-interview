@@ -41,7 +41,7 @@ class Util {
         System.out.print(v + ", ");
     }
 
-    static void preOrder(MinimalTree.Node node) {
+    static void preOrder(Node node) {
         //NLR
         if (node == null) return;
         System.out.print(node.data + " , ");
@@ -49,7 +49,7 @@ class Util {
         preOrder(node.right);
     }
 
-    static void postOrder(MinimalTree.Node node) {
+    static void postOrder(Node node) {
         //LRN
         if (node == null) return;
         postOrder(node.left);
@@ -58,7 +58,7 @@ class Util {
 
     }
 
-    static void inOrder(MinimalTree.Node node) {
+    static void inOrder(Node node) {
         //LNR
         if (node == null) return;
         inOrder(node.left);
