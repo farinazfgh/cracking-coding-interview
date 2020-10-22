@@ -1,4 +1,8 @@
 package cyclicsort;
+/*
+O(n) + O(n-1) which is asymptotically equivalent to O(n).
+Space complexity # The algorithm runs in constant space O(1).
+ */
 
 public class CyclicSort {
     static void sort(int[] array) {
