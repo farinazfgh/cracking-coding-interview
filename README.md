@@ -1,2 +1,2 @@
-# cracking-coding-interview
-Solutions for Cracking the Coding Interview problems.
+# miscellaneous
+Solutions for algorithms and data structures problems.
