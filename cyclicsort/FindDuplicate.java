@@ -6,15 +6,15 @@ package cyclicsort;
 
 class FindDuplicate {
 
-    public static int findNumber(int[] nums) {
+    public static int findNumber(int[] array) {
         int i = 0;
-        while (i < nums.length) {
+        while (i < array.length) {
             //to place each number on its correct index.
-            if (nums[i] != i + 1) {
-                if (nums[i] != nums[nums[i] - 1])
-                    swap(nums, i, nums[i] - 1);
+            if (array[i] != i + 1) {
+                if (array[i] != array[array[i] - 1])
+                    swap(array, i, array[i] - 1);
                     // Since there is only one duplicate, if while swapping the number with its index both the numbers being swapped are same, we have found our duplicate!
-                else return nums[i];
+                else return array[i];
             } else {
                 i++;
             }
