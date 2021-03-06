@@ -1,4 +1,4 @@
-package sortingsearching;
+package sortingsearching.classic;
 
 public class Selection {
     void sort(int[] array) {
