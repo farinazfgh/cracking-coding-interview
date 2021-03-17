@@ -1,4 +1,4 @@
-package hackerrank;
+package hackerrank.interview;
 
 public class CamelCase {
     // saveChangesInTheEditor

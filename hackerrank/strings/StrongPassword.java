@@ -1,4 +1,4 @@
-package strings;
+package hackerrank.strings;
 
 import java.util.HashMap;
 import java.util.Map;

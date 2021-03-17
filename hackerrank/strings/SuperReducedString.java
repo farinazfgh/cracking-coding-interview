@@ -1,4 +1,4 @@
-package strings;
+package hackerrank.strings;
 
 public class SuperReducedString {
     static String superReducedString(String s) {

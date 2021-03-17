@@ -1,4 +1,4 @@
-package warmup;
+package hackerrank.warmup;
 
 public class PlusMinus {
     static void printResult(double p, double n, double z) {

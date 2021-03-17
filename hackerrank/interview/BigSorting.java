@@ -1,4 +1,4 @@
-package hackerrank;
+package hackerrank.interview;
 
 import java.util.Arrays;
 
