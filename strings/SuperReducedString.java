@@ -1,2 +1,44 @@
-package strings;public class SuperReducedString {
+package strings;
+
+public class SuperReducedString {
+    static String superReducedString(String s) {
+        String reducedStr = onePassReduce(s);
+        while (reducedStr.length() < s.length()) {
+            s = reducedStr;
+            reducedStr = onePassReduce(reducedStr);
+        }
+        return reducedStr;
+    }
+
+    static String onePassReduce(String s) {
+        if (s == null || s.length() == 0) return "Empty String";
+        if (s.length() == 1) return s;
+        int count = 1;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length() - 1; i++) {
+
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+
+            } else {
+                if (count % 2 == 1) sb.append(s.charAt(i));
+                count = 1;
+            }
+
+        }
+        if (s.charAt(s.length() - 1) == s.charAt(s.length() - 2)) {
+            if (count % 2 == 1) sb.append(s.charAt(s.length() - 1));
+        } else {
+            if (count % 2 == 1) sb.append(s.charAt(s.length() - 1));
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        //i<8 i=7
+        System.out.println(superReducedString("aaabccddd"));
+        System.out.println(superReducedString("aab"));
+        System.out.println(superReducedString("abba"));
+    }
+
 }
