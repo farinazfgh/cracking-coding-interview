@@ -1,0 +1,4 @@
+Arrays.sort uses dual-pivot Quicksort on primitives. It offers O(n log(n)) performance and is typically faster than traditional (one-pivot) Quicksort implementations.
+It uses a stable, adaptive, iterative implementation of mergesort algorithm for Array of Objects.
+
+Collections.Sort, it uses a modified mergesort and offers guaranteed O(n log(n)) performance.
