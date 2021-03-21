@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public class BigSorting {
     //todo failed for one test case time exceeded
     //https://medium.com/swlh/slow-sorting-and-big-o-notation-aa31631ceacb
+    //try fork join later
     static class MyNumber implements Comparable<MyNumber> {
         final String numberStr;
 
